@@ -1,0 +1,22 @@
+<head>
+    <meta charset=utf-8>
+    <title>InstaSlideShow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+
+
+<template name="mainLayout">
+    <header class="{{currentHeaderClass}}">
+        <div class="container clr">
+            {{#if headerLinkHref}}<a class="right" href="{{headerLinkHref}}">{{headerLinkText}}</a>{{/if}}
+            <h1 class="left">
+                <a href="{{pathFor route='Home' }}">InstaSlideShow</a>{{#if currentPageName}}{{/if}}
+                {{#if currentPageName}}› {{currentPageName}}{{/if}}
+            </h1>
+        </div>
+    </header>
+    <div class="container">
+        {{> yield}}
+    </div>
+</template>

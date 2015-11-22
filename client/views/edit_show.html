@@ -1,0 +1,56 @@
+
+<template name="EditShow">
+    <div class="clr">
+
+        <h2 class="left">
+            {{#if editingName}}
+            <form class="edit-name"><input type="text" name="name" value="{{slideShow.name}}" /></form>
+            {{else}}
+            <span class="edit-name">{{slideShow.name}}</span>
+            {{/if}}
+        </h2>
+        <p class="left">
+            (<a href="{{ pathFor route='SlideShow' _id=slideShow._id }}">view</a>)
+        </p>
+
+        <div class="right br">
+            {{#if updatingImages}}
+            updating <img src="/bounce.gif" alt="loading" />
+            {{else}}
+            Last updated:
+            {{#if slideShow.lastUpdated}}
+            <span title="{{fulltime slideShow.lastUpdated}}">
+                {{livestamp slideShow.lastUpdated}}
+            </span>
+            {{else}}
+            never
+            {{/if}}
+            <button class="check-for-updates">Check for updates</button>
+            {{/if}}
+        </div>
+
+        <p class="clearboth left br">
+            <label><input type="checkbox" class="private-val" checked="{{privateChecked}}"> is private</label>
+        </p>
+
+        <p class="right">
+            <a class="toggle toggle-show" href="#">
+                show {{#if showOnlySelected}}all{{else}}selected{{/if}}
+            </a>
+        </p>
+    </div>
+
+    <p>
+        Select images for your slide show:
+        <br><br>
+    </p>
+
+    <ul id="scrollable-media" class="editable-media">
+        {{#each scrollableMedia}}
+        <li class="editable-medium {{mediumSelectedClass}}" tabindex="0">
+            <img src="{{images.thumbnail.url}}"
+                 title="{{caption.text}}" />
+        </li>
+        {{/each}}
+    </ul>
+</template>

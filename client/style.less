@@ -1,0 +1,262 @@
+
+@line-height: 24px;
+
+html, body, h1, h2, h3, h4, div, p, form {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    display: block;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: #fff;
+    font-family: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", "Lucida Grande";
+    font-size: 16px;
+    line-height: @line-height;
+    color: #333;
+}
+
+// body { margin-top: 20px; }
+
+.clr { overflow: hidden; }
+.left { float: left; }
+.right { float: right; }
+.clearboth { clear: both; }
+.br { margin-bottom: @line-height; }
+
+@container-side-pad: 15px;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 @container-side-pad;
+}
+
+h1 {
+    font-size: 30px;
+    line-height: @line-height*2;
+}
+
+h2, h3 {
+    margin-bottom: @line-height;
+    font-size: 20px;
+
+    &.left {
+        margin-right: 5px;
+    }
+}
+
+a {
+    @color: #2793c7;
+    @color-hover: #333;
+    color: @color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: @color-hover;
+        text-decoration: underline;
+    }
+
+    &.toggle {
+        display: inline-block;
+        border-bottom: 1px dotted @color;
+        line-height: 1;
+        vertical-align: middle;
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            border-color: @color-hover;
+        }
+    }
+}
+
+button {
+    box-sizing: border-box;
+    vertical-align: top;
+    height: 20px;
+    margin: 2px 0;
+    font-size: 12px;
+}
+
+
+// Header
+
+header {
+    @color: #fee6f0;
+    position: relative;
+    padding: @line-height/2 0;
+    margin-bottom: @line-height;
+    background: #ed5c73;
+    line-height: @line-height*2; // match h1
+    color: @color;
+
+    &.slide-show {
+        opacity: 0;
+        z-index: 100;
+        transition: opacity .5s ease-in-out;
+        &.force-show,
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    a {
+        color: @color;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: #f39b75;
+            text-decoration: none;
+            // text-shadow: -1px 1px 0 rgba(255, 255, 255, .8);
+        }
+    }
+}
+
+
+// Home
+
+.home-info {
+    font-family: cursive;
+    font-size: 18px;
+
+    li {
+        margin: 1em 0;
+    }
+}
+
+.your-slide-shows {
+    li {
+        padding: @line-height/4 0;
+    }
+}
+
+
+// SlideShow
+
+.display {
+    position: fixed;
+    top: 20px;
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+
+
+// Add Show
+
+.form {
+    p {
+        margin-bottom: @line-height;
+    }
+    @input-height: @line-height*1.5;
+    label {
+        display: inline-block;
+        height: @input-height;
+        line-height: @input-height;
+        min-width: 70px;
+        font-weight: bold;
+    }
+    input[type=text] {
+        display: inline-block;
+        min-width: 215px;
+        box-sizing: border-box;
+        height: @input-height;
+        padding: 2px 6px;
+        margin: 0;
+        border-width: 2px;
+        line-height: (@input-height - 2px*2 - 2px*2);
+        font-size: 16px;
+    }
+    button {
+        box-sizing: border-box;
+        height: @input-height;
+        padding: 0 10px;
+        border-width: 2px;
+        line-height: (@input-height - 2px*2);
+        font-size: 16px;
+    }
+}
+
+
+// Edit Show
+
+.edit-name {
+    display: inline;
+    span& {
+        cursor: pointer;
+    }
+}
+
+.editable-media {
+    @img-width: 150px;
+
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    zoom: 1;
+
+    li {
+        float: left;
+        position: relative;
+        list-style: none;
+        width: 25%;
+        padding-bottom: 25%;
+        background: #eee;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #fff url(/diag.png) scroll repeat 0 0; // TODO - background pattern to cover up
+            opacity: .4;
+            pointer-events: none; // TODO - IE10 support
+        }
+
+        &.selected {
+            // border: 3px solid green;
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    @media (max-width: (@img-width*3 + @container-side-pad*2)) {
+        li {
+            @w: 100%/3;
+            width: @w;
+            padding-bottom: @w;
+        }
+    }
+    @media (max-width: (@img-width*2 + @container-side-pad*2)) {
+        li {
+            @w: 100%/2;
+            width: @w;
+            padding-bottom: @w;
+        }
+    }
+}

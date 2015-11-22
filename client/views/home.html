@@ -1,0 +1,31 @@
+
+<template name="Home">
+    <br>
+    <p>A free Instagram slide show creator…</p>
+    <br>
+    <ol class="home-info">
+        <li>Sign in with Instagram</li>
+        <li>Name your slide show</li>
+        <li>Pick the images you want</li>
+        <li>Share your slide show with the world!</li>
+    </ol>
+    <br>
+    <button class="login">Login to get started</button>
+</template>
+
+
+<template name="HomeLoggedIn">
+    <button class="logout right">Logout</button>
+    <h3>Your Slide Shows</h3>
+
+    <ul class="your-slide-shows">
+        {{#each slideShows}}
+        <li>
+            <a href="{{pathFor route='SlideShow'}}">{{name}} - {{safelength mediaIds}} slides</a>
+            (<a href="{{pathFor route='EditShow'}}">edit</a>)</li>
+        {{/each}}
+        <li>
+            <a href="{{pathFor route='AddShow'}}">Add +</a>
+        </li>
+    </ul>
+</template>
