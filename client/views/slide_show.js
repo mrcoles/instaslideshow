@@ -21,9 +21,10 @@ Router.route('/show/:_id', {
             linkHref = Router.url('EditShow', {_id: slideShow._id});
             linkText = 'edit';
         }
+        var mediaIds = slideShow && slideShow.mediaIds || [];
         return {
             slideShow: slideShow,
-            media: InstaMedia.find({}),
+            media: InstaMedia.find({_id: {$in: mediaIds}}),
             currentPageName: slideShow ? slideShow.name : '',
             currentHeaderClass: 'slide-show force-show',
             headerLinkHref: linkHref,
